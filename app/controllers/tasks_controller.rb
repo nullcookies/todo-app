@@ -28,6 +28,18 @@ class TasksController < ApplicationController
       end
     end
     
+    def done
+        @task = Task.find(params[:id])
+        
+        if(@task)
+            @task.status = "true";
+    
+            redirect_to root_path if @task.save
+        else
+            redirect_to root_path
+        end
+    end
+    
     def destroy
       @task = Task.find(params[:id])
       @task.destroy
